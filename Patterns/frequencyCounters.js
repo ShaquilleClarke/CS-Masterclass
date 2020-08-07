@@ -12,6 +12,8 @@
 
 // The frequency of the values must be the same 
 
+//===================== Brute Force Solution ============================
+
 // 1. Make sure the arrays are the same length. Return false if condition isn't met
 // 2. Create a for loop to iterate through the first array
 // 3. Use the indexOf() method on the second array to locate the index with the squared values. Store the results in a variable
@@ -36,27 +38,62 @@
 //     return true;
 // }
 
-const same = (arr1, arr2) => {
-    if (arr1.length !== arr2.length) return false;
+//==================== Simpler Solution ========================
 
-    let frequency1 = {}, frequency2 = {};
+// const same = (arr1, arr2) => {
+//     if (arr1.length !== arr2.length) return false;
 
-    for (let key of arr1) {
-        frequency1[key] = (frequency1[key] || 0) + 1
+//     let frequency1 = {}, frequency2 = {};
+
+//     for (let key of arr1) {
+//         frequency1[key] = (frequency1[key] || 0) + 1
+//     }
+    
+//     for (let key of arr2) {
+//         frequency2[key] = (frequency2[key] || 0) + 1
+//     }
+
+//     for (let key in frequency1) {
+//         if (!(key ** 2 in frequency2)) return false;
+
+//         if (frequency2[key ** 2] !== frequency1[key]) return false;
+//     }
+//     return true;
+// }
+
+// console.log(same([1, 2, 4], [1, 4, 16]))
+    
+
+
+
+
+// ============================ Another Example ====================================
+// We wan to know if the characters in the first string can be rearranged to create the second string
+
+// We will return a boolean: true or false
+
+// First we'll initialize two objects, one for each string
+
+const anagram = (str1, str2) => {
+    if (str1.length !== str2.length) return false;
+
+    let cache = {}
+
+    for (let char of str1.split('')) {
+        cache[char] = (cache[char] || 0) + 1
     }
     
-    for (let key of arr2) {
-        frequency2[key] = (frequency2[key] || 0) + 1
-    }
-
-    for (let key in frequency1) {
-        if (!(key ** 2 in frequency2)) return false;
-
-        if (frequency2[key ** 2] !== frequency1[key]) return false;
+    for (let char of str2.split('')) {
+        if (!cache[char]) return false;
+        // console.log('current char: ', char)
+        // console.log('cache before: ', cache)
+        cache[char] -= 1
+        // console.log('cache after: ', cache)
     }
     return true;
 }
 
     
 
-console.log(same([1, 2, 4], [1, 4, 16]))
+
+console.log(anagram('doog', 'good'))
