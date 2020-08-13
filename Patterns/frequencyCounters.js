@@ -96,4 +96,4 @@ const anagram = (str1, str2) => {
     
 
 
-console.log(anagram('doog', 'good'))
+console.log(anagram('dorg', 'good'))
