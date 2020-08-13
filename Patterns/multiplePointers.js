@@ -23,16 +23,38 @@
 
 // }
 
-const sumZero = (arr) => {
-    let start = 0, end = arr.length - 1;
+// const sumZero = (arr) => {
+//     let start = 0, end = arr.length - 1;
+
+//     while (start < end) {
+//         let sum = arr[start] + arr[end];
+
+//         if (sum === 0) return [arr[start], arr[end]];
+//         else if (sum > 0) end--;
+//         else start ++
+//     }
+// }
+
+// console.log(sumZero([-3, -2, -1, 0, 1, 2, 3, 4, 5]))
+
+
+// const countUniqueValues = (arr) => {
+    // The function accepts an assorted array
+    // Return the number of unique values in the array
+    // [1, 1, 1, 1, 1, 2] => 1
+    // [1, 2, 2, ,3]
+// }
+
+const countUniqueValues = (arr) => {
+    let start = 0, end = arr.length - 1, count = 0;
 
     while (start < end) {
-        let sum = arr[start] + arr[end];
-
-        if (sum === 0) return [arr[start], arr[end]];
-        else if (sum > 0) end--;
-        else start ++
+        if (arr[start] === arr[end]) {
+            start++;
+            end--;
+        } else {
+            count++;
+        }
     }
+    return count
 }
-
-console.log(sumZero([-3, -2, -1, 0, 1, 2, 3, 4, 5]))
