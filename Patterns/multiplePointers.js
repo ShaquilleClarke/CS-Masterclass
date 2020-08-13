@@ -42,19 +42,21 @@
     // The function accepts an assorted array
     // Return the number of unique values in the array
     // [1, 1, 1, 1, 1, 2] => 1
-    // [1, 2, 2, ,3]
+    // [1, 2, 2, ,3] => 2
 // }
 
 const countUniqueValues = (arr) => {
-    let start = 0, end = arr.length - 1, count = 0;
+    let start = 0, next = 1;
 
-    while (start < end) {
-        if (arr[start] === arr[end]) {
-            start++;
-            end--;
-        } else {
-            count++;
+    if (arr.length === 0) return 0;
+
+    while (next < arr.length) {
+        if (arr[start] !== arr[next]) {
+            start++
+            arr[start] = arr[next];
         }
+        next++;
     }
-    return count
+    return start + 1;
 }
+console.log(countUniqueValues([1, 2, 2, 5, 7, 7, 99]))
