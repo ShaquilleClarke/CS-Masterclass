@@ -1,3 +1,5 @@
+const assert = require('assert').strict;
+
 // Creating pointers or values that correspond to an index or position and moves towards the beginning,
 // middle, or end based on a certain condition 
 
@@ -52,11 +54,17 @@ const countUniqueValues = (arr) => {
 
     while (next < arr.length) {
         if (arr[start] !== arr[next]) {
-            start++
+            start++;
             arr[start] = arr[next];
         }
         next++;
     }
     return start + 1;
 }
-console.log(countUniqueValues([1, 2, 2, 5, 7, 7, 99]))
+
+let expected = countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]) 
+
+assert.deepStrictEqual(expected, 7)
+// console.log(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]))
+
+
