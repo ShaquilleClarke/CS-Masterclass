@@ -62,9 +62,9 @@ const countUniqueValues = (arr) => {
     return start + 1;
 }
 
-let expected = countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]) 
 
-assert.deepStrictEqual(expected, 7)
+assert.deepStrictEqual(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]), 7);
+
+console.log(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7])); 
 // console.log(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]))
-
 
