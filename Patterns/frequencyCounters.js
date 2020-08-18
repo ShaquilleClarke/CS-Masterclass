@@ -74,26 +74,78 @@
 
 // First we'll initialize two objects, one for each string
 
-const anagram = (str1, str2) => {
-    if (str1.length !== str2.length) return false;
+// const anagram = (str1, str2) => {
+//     if (str1.length !== str2.length) return false;
 
-    let cache = {}
+//     let cache = {};
 
-    for (let char of str1.split('')) {
-        cache[char] = (cache[char] || 0) + 1
-    }
+//     for (let char of str1) {
+//         cache[char] = (cache[char] || 0) + 1
+//     }
     
-    for (let char of str2.split('')) {
-        if (!cache[char]) return false;
-        // console.log('current char: ', char)
-        // console.log('cache before: ', cache)
-        cache[char] -= 1
-        // console.log('cache after: ', cache)
+//     for (let char of str2) {
+//         if (!cache[char]) return false;
+//         // console.log('current char: ', char)
+//         // console.log('cache before: ', cache)
+//         cache[char] -= 1
+//         // console.log('cache after: ', cache)
+//     }
+//     return true;
+// }
+
+    
+
+
+// console.log(anagram('borg', 'gorb'))
+
+
+// const sameFrequency = (n1, n2) => {
+//     const num1 = n1.toString().split(''), num2 = n2.toString().split('');
+
+//     if (num1.length !== num2.length) return false;
+    
+//     let freqCount1 = {}, freqCount2 = {};
+
+//     for (let key of num1) {
+//         freqCount1[key] = (freqCount1[key] || 0) + 1;
+//     }
+
+//     for (let key of num2) {
+//         freqCount2[key] = (freqCount2[key] || 0) + 1;
+//     }
+
+//     for (let key in freqCount1) {
+//         if (!(key in freqCount2)) return false;
+
+//         if (freqCount2[key] !== freqCount1[key]) return false;
+//     }
+
+//     // console.log(cache)
+
+//     return true;
+// }
+
+// console.log(sameFrequency(182, 281));
+// console.log(sameFrequency(34, 14));
+// console.log(sameFrequency(3589578, 5879385));
+// console.log(sameFrequency(22, 222));
+
+
+//======================================================================
+
+
+const areThereDuplicates = (...args) => {
+    let cache = {};
+
+    for (let char of args) {
+        cache[char] = (cache[char] || 0)+1;
     }
-    return true;
+
+    for (let key in cache) {
+        if (cache[key] > 1) return true;
+    }
+    return false;
 }
-
-    
-
-
-console.log(anagram('dorg', 'good'))
+console.log(areThereDuplicates(1, 2, 3))
+// console.log(areThereDuplicates(1, 2, 2))
+// console.log(areThereDuplicates('a', 'b', 'c', 'a'))

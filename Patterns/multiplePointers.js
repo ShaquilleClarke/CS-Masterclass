@@ -47,24 +47,59 @@ const assert = require('assert').strict;
     // [1, 2, 2, ,3] => 2
 // }
 
-const countUniqueValues = (arr) => {
-    let start = 0, next = 1;
+// const countUniqueValues = (arr) => {
+//     let start = 0, next = 1;
 
-    if (arr.length === 0) return 0;
+//     if (arr.length === 0) return 0;
 
-    while (next < arr.length) {
-        if (arr[start] !== arr[next]) {
-            start++;
-            arr[start] = arr[next];
-        }
-        next++;
+//     while (next < arr.length) {
+//         if (arr[start] !== arr[next]) {
+//             start++;
+//             arr[start] = arr[next];
+//         }
+//         next++;
+//     }
+//     return start + 1;
+// }
+
+
+// assert.deepStrictEqual(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]), 7);
+
+// console.log(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7])); 
+// console.log(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]))
+
+
+
+//==============================================
+
+// const averagePair = (arr, val) => {
+//     if (arr.length === 0) return false;
+
+//     let start = 0, end = arr.length -1;
+
+//     while (start < end) {
+//         let avr = (arr[start] + arr[end] / 2)
+//         if (val > avr) start++;
+//         else if (val < avr) end--;
+//         else return true;
+//     }
+//     return false;
+// }
+
+// console.log(averagePair([-1, 0, 3, 4, 5, 6], 4.1))
+
+//====================================================
+
+const isSubsequence = (str1, str2) => {
+    let i = 0, j = 0;
+    if(!str1) return true;
+    while(j < str2.length) {
+        if (str2[j] === str1[i]) i++;
+        if (i === str1.length) return true;
+        j++;
     }
-    return start + 1;
+    return false;
 }
 
-
-assert.deepStrictEqual(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]), 7);
-
-console.log(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7])); 
-// console.log(countUniqueValues([1, 1, 2, 3, 3, 4, 5, 6, 6, 7]))
+console.log(isSubsequence('sing', 'sting'))
 
