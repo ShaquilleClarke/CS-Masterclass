@@ -31,7 +31,6 @@ class HashTable {
 
     set(key, value) {
         let index = this._hash(key);
-        return index;
         if (!this.keyMap[index]) {
             this.keyMap[index] = [];
         }
@@ -42,14 +41,47 @@ class HashTable {
         let index = this._hash(key);
         if (this.keyMap[index]) {
             for (let i = 0; i < this.keyMap[index].length; i++) {
-                if (this.keyMap[index][i][0] === key) return this.keyMap[index][i]
+                if (this.keyMap[index][i][0] === key) return this.keyMap[index][i][1];
             }
         }
         return undefined;
     }
+
+    values() {
+        let valuesArr = [];
+        for (let i = 0; i < this.keyMap.length; i++) {
+            if (this.keyMap[i]) {
+                for (let j = 0; j < this.keyMap[i].length; j++) {
+                    if (!valuesArr.includes(this.keyMap[i][j][1])) {
+                        valuesArr.push(this.keyMap[i][j][1])
+                    }
+                }
+            }
+        }
+        return valuesArr;
+    }
+    keys() {
+        let keysArr = [];
+        for (let i = 0; i < this.keyMap.length; i++) {
+            if (this.keyMap[i]) {
+                for (let j = 0; j < this.keyMap[i].length; j++) {
+                    if (!keysArr.includes(this.keyMap[i][j][0])) {
+                        keysArr.push(this.keyMap[i][j][0])
+                    }
+                }
+            }
+        }
+        return keysArr;
+    }
 }
+
 let ht = new HashTable(17)
 log(ht.set('hello world', 'goodbye!!'))
 log(ht.set('hot', 'dog'))
 log(ht.set('spaghetti', 'sauce'))
 log(ht.get('hello world'))
+log(ht.get('spaghetti'))
+log(ht.get('hot'))
+log(ht)
+log(ht.values())
+log(ht.keys())
