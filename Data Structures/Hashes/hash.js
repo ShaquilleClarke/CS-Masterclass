@@ -17,8 +17,11 @@ let log = console.log;
 class HashTable {
     constructor(size = 53) {
         this.keyMap = new Array(size);
+        // This array will store an array of linked lists
     }
 
+
+    // Our hash function simply takes an input and converts it to a string
     _hash(key) {
         let total = 0, WEIRD_PRIME = 31;
         for (let i = 0; i < Math.min(key.length, 100); i++) {
@@ -28,7 +31,11 @@ class HashTable {
         }
         return total;
     }
-
+    
+    // We create our index by using the hash function and storing its result
+    // We then check to see to see if that index is occupied. If it isn't occupied then we proceed to line 40, otherwise we will proceed to
+    // line 43
+    // Remember that we are storing an array of linked lists 
     set(key, value) {
         let index = this._hash(key);
         if (!this.keyMap[index]) {
@@ -36,7 +43,7 @@ class HashTable {
         }
         this.keyMap[index].push([key, value]);
     } 
-
+    
     get(key) {
         let index = this._hash(key);
         if (this.keyMap[index]) {
@@ -77,11 +84,11 @@ class HashTable {
 
 let ht = new HashTable(17)
 log(ht.set('hello world', 'goodbye!!'))
-log(ht.set('hot', 'dog'))
-log(ht.set('spaghetti', 'sauce'))
+// log(ht.set('hot', 'dog'))
+// log(ht.set('spaghetti', 'sauce'))
 log(ht.get('hello world'))
-log(ht.get('spaghetti'))
-log(ht.get('hot'))
-log(ht)
+// log(ht.get('spaghetti'))
+// log(ht.get('hot'))
+// log(ht)
 log(ht.values())
-log(ht.keys())
+// log(ht.keys())
