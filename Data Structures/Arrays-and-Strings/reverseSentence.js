@@ -11,7 +11,7 @@ const reverseSentence = (str) => {
     buffer += strArr[i];
     i--
   }
-  return '"' + buffer + '"';  
+  return buffer;  
 }
 log(reverseSentence('walk my dog'))
         
