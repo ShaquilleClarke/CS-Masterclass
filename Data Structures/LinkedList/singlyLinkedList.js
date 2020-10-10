@@ -75,25 +75,53 @@ class LinkedList {
             indx++;
         }
         return null;
-
     }
+
+    set(data) {
+        let newNode = new Node(data);
+    }
+
 }
 
-let list = new LinkedList;
-list.push('humpty');
-list.push('dumpty');
-list.push('butt cheeks');
-list.push('keeo pushin');
-list.push('abracadabra')
-log(list.pop());
-log(list)
-log(list.pop());
-log(list)
-log(list.shift());
-log(list)
-log(list.unShift('coochie'))
-log(list.get(2))
+// let list = new LinkedList;
+// list.push('humpty');
+// list.push('dumpty');
+// list.push('butt cheeks');
+// list.push('keeo pushin');
+// list.push('abracadabra')
+// log(list.pop());
+// log(list)
+// log(list.pop());
+// log(list)
+// log(list.shift());
+// log(list)
+// log(list.unShift('coochie'))
+// log(list.get(2))
+
 
 // log(list.pop());
 // log(list.pop());
 
+const list2 = new LinkedList;
+list2.push(1);
+list2.push(2);
+list2.push(3);
+list2.push(4);
+list2.push(5);
+
+const nToLast = (list, n) => {
+    if(!list.head) return;
+
+    let target = (list.length - 1) - n;
+    let indx = 0;
+    let current = list.head;
+
+    while (current) {
+        if (indx === target) return current.data;
+        current = current.next;
+        indx++;
+    }
+    return null;
+}
+
+log(nToLast(list2, ))
