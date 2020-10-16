@@ -87,17 +87,47 @@ class LinkedList {
     }
 
     insert(index, val) {
-        if(index > this.length || index < 0) return;
-        if(index === this.length) this.push(val);
+        if (index < 0 || index > this.length) return false;
         if(index === 0) this.unShift(val);
-        
+        if(index === this.length) this.push(val);
+
         let prev = this.get(index - 1);
         let next = prev.next;
         let newNode = new Node(val);
-        newNode.next = next;
-        prev.next = newNode;
-        this.length++
 
+        prev.next = newNode;
+        newNode.next = next;
+        this.length++;
+
+        return true;
+    }
+
+    remove(index) {
+        if (index < 0 || index > this.length) return false;
+        if (index === 0) this.shift();
+        if (index === (this.length-1)) this.pop();
+
+        let prev = this.get(index - 1);
+        let next = prev.next.next;
+    
+        prev.next = next;
+        this.length--;
+        return prev.next
+    }
+
+    reverse() {
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        let prev = null;
+        let next;
+
+        while (node) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
         return this;
     }
 
@@ -112,7 +142,12 @@ list.push('keeo pushin');
 list.push('abracadabra')
 list.set(4, 'pootie tang')
 list.insert(2, 'dogma')
-log(list.get(1))
+list.insert(1, 'cupertino');
+list.remove(3);
+list.reverse();
+log(list.get(0))
+//log(list.get(3))
+
 // log(list.pop());
 // log(list)
 // log(list.pop());
