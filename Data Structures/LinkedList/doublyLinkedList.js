@@ -72,7 +72,7 @@ class DoublyLinkedList {
     }
 
     get(index) {
-        if (!this.head || index < 0) return;
+        if (!this.head || index < 0) return null;
         if (index === 0) return this.head;
         let current = this.head, count = 0;
         while (current) {
@@ -81,6 +81,14 @@ class DoublyLinkedList {
             count++;
         }
         return false;
+    }
+
+    set(index, data) {
+        if (index < 0 || index === this.length) return null;
+        if (!this.head) this.head = new Node(data);
+        let getIndx = this.get(index);
+        getIndx.val = data;
+        return true;
     }
 }
 
@@ -94,4 +102,5 @@ list.unshift(1);
 list.unshift(6);
 list.unshift(8);
 // list.pop();
-log(list.get(3))
+log(list.set(1, 'fufu'));
+// log(list.get(1))
