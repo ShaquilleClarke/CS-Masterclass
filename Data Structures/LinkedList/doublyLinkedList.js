@@ -84,11 +84,9 @@ class DoublyLinkedList {
     }
 
     set(index, data) {
-        if (index < 0 || index === this.length) return null;
-        if (!this.head) this.head = new Node(data);
         let getIndx = this.get(index);
-        getIndx.val = data;
-        return true;
+        if (getIndx) getIndx.val = data;
+        else return false;
     }
 }
 
@@ -102,5 +100,5 @@ list.unshift(1);
 list.unshift(6);
 list.unshift(8);
 // list.pop();
-log(list.set(1, 'fufu'));
+log(list.set(7, 'fufu'));
 // log(list.get(1))
