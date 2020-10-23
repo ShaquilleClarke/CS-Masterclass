@@ -88,6 +88,19 @@ class DoublyLinkedList {
         if (getIndx) getIndx.val = data;
         else return false;
     }
+
+    insert(index, data) {
+        if (index < 0 || index > this.length) return false;
+        if (index === 0) this.unshift(data);
+        if (index === this.length) this. push(data);
+        let prev = this.get(index - 1), next = this.get(index + 1);
+        let newNode = new Node(data);
+        prev.next = newNode;
+        newNode.prev = prev;
+        newNode.next = next;
+        next.prev = newNode;
+        return true;
+    }
 }
 
 
@@ -100,5 +113,5 @@ list.unshift(1);
 list.unshift(6);
 list.unshift(8);
 // list.pop();
-log(list.set(7, 'fufu'));
+log(list.insert(2, 'doku'));
 // log(list.get(1))
