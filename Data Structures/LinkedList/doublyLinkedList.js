@@ -99,6 +99,7 @@ class DoublyLinkedList {
         newNode.prev = prev;
         newNode.next = next;
         next.prev = newNode;
+        this.length++;
         return true;
     }
 }
