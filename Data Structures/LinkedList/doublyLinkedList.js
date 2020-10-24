@@ -93,7 +93,7 @@ class DoublyLinkedList {
         if (index < 0 || index > this.length) return false;
         if (index === 0) this.unshift(data);
         if (index === this.length) this. push(data);
-        let prev = this.get(index - 1), next = this.get(index + 1);
+        let prev = this.get(index - 1), next = prev.next;
         let newNode = new Node(data);
         prev.next = newNode;
         newNode.prev = prev;
