@@ -116,6 +116,36 @@ class DoublyLinkedList {
         this.length--;
         return next;
     }
+
+    print() {
+        let current = this.head;
+        let arr = [];
+        let count = 0;
+        while(count < this.length) {
+            arr.push(current.val);
+            current = current.next;
+            count++;
+        }
+        log(arr)
+    }
+
+    reverse() {
+        if(!this.head) return undefined;
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+
+        let next;
+        let prev = null;
+        while(node) {
+            next = node.next;
+            node.prev = next;
+            node.next = prev;
+            prev = node;
+            node = next; 
+        }
+        return this;
+    }
 }
 
 
@@ -126,8 +156,8 @@ list.push(2);
 list.push(3);
 list.push(4);
 list.insert(2, 'doku');
-list.remove(2);
-log(list.get(2))
+list.reverse()
+list.print()
 // log(list.get(2));
 
 // log(list.get(1))
