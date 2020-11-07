@@ -32,7 +32,17 @@ class BST {
             }
         }
         searchTree(this.root);
-        // return this;
+    }
+
+    contains(data) {
+        if (!this.root) return undefined;
+        let current = this.root;
+        while(current) {
+            if (data === current.value) return true;
+            else if (data < current.value) current = current.left;
+            else if (data > current.value) current = current.right;
+        }
+        return false;
     }
 }
 
@@ -45,5 +55,5 @@ tree.insert(9);
 tree.insert(13);
 tree.insert(27);
 tree.insert(11);
-log(treeify.asTree(tree, true));
-// log(tree)
+// log(treeify.asTree(tree, true));
+log(tree.contains(11))
