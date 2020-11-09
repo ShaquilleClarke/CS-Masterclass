@@ -44,6 +44,20 @@ class BST {
         }
         return false;
     }
+
+    BFS() {
+        let visited = [],
+            queue = [],
+            node = this.root;
+        queue.push(node);
+        while(queue.length) {
+            node = queue.shift();
+            visited.push(node);
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right);
+        }
+        return visited;
+    }
 }
 
 const tree = new BST;
@@ -56,4 +70,4 @@ tree.insert(13);
 tree.insert(27);
 tree.insert(11);
 // log(treeify.asTree(tree, true));
-log(tree.contains(11))
+log(tree.BFS());
