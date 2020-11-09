@@ -52,10 +52,43 @@ class BST {
         queue.push(node);
         while(queue.length) {
             node = queue.shift();
-            visited.push(node);
+            visited.push(node.value);
             if(node.left) queue.push(node.left);
             if(node.right) queue.push(node.right);
         }
+        return visited;
+    }
+
+    dfsPreOrder() {
+        let visited = [];
+        const traverse = (node) => {
+            visited.push(node.value);
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+        }
+        traverse(this.root);
+        return visited;
+    }
+
+    dfsPostOrder() {
+        let visited = [];
+        const traverse = (node) => {
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+            visited.push(node.value);
+        }
+        traverse(this.root);
+        return visited;
+    }
+
+    dfsInOrder() {
+        let visited = [];
+        const traverse = (node) => {
+            if(node.left) traverse(node.left);
+            visited.push(node.value);
+            if(node.right) traverse(node.right);
+        }
+        traverse(this.root);
         return visited;
     }
 }
@@ -70,4 +103,4 @@ tree.insert(13);
 tree.insert(27);
 tree.insert(11);
 // log(treeify.asTree(tree, true));
-log(tree.BFS());
+log(tree.dfsPreOrder());
