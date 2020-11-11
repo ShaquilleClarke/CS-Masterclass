@@ -17,7 +17,7 @@ class MaxBinaryHeap {
             if (element <= parent) break;
             this.values[parentIndx] = element;
             this.values[indx] = parent;
-            indx = parent;
+            indx = parentIndx;
         }
     }
 }
