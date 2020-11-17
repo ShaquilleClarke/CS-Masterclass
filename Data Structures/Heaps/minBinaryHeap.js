@@ -33,8 +33,11 @@ class PriorityQueue {
 
     dequeue() {
         let min = this.values[0], end = this.values.pop();
-        if(this.values.length > 0) this.values[0] = end;
-        this.sinkDown();
+        if(this.values.length > 0) {
+            this.values[0] = end;
+            this.sinkDown();
+
+        }
         return min;
     }
 
