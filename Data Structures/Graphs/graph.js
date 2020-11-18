@@ -26,11 +26,21 @@ class Graph {
             );
         }
     }
+
+    removeVertex(vertex) {
+        let vrtx = this.adjacencyList[vertex];
+        while(vrtx.length) {
+            let adjVrtx = vrtx.pop();
+            this.removeEdge(vertex, adjVrtx);
+        }
+        delete this.adjacencyList[vertex];
+    }
 }
 
 let g = new Graph;
 g.addVertex('Dani');
 g.addVertex('Red');
 g.addEdge('Dani', 'Red');
-g.removeEdge('Dani', 'Red')
+g.removeVertex('Dani');
 log(g.adjacencyList)
+
