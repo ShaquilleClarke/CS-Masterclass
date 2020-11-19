@@ -35,12 +35,54 @@ class Graph {
         }
         delete this.adjacencyList[vertex];
     }
+
+    dfsRecursive(start) {
+        let results = [], visited = {}, adjList = this.adjacencyList;
+        const traverse = (vertex) => {
+            if(!vertex) return;
+            visited[vertex] = true;
+            results.push(vertex);
+            for(let val of adjList[vertex]) {
+                if(!visited[val]) traverse(val)
+            }
+        }
+        traverse(start)
+        return results;
+    }
+
+    dfsIterative(start) {
+        let results = [], visited = {}, adjList = this.adjacencyList, stack = [start], next
+        visited[start] = true;
+        while(stack.length) {
+            next = stack.pop();
+            results.push(next);
+            for(let val of adjList[next]) {
+                if(!visited[val]) {
+                    visited[val] = true;
+                    stack.push(val);
+                }
+            }
+        }
+        return results;
+    }
 }
 
 let g = new Graph;
-g.addVertex('Dani');
-g.addVertex('Red');
-g.addEdge('Dani', 'Red');
-g.removeVertex('Dani');
-log(g.adjacencyList)
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addVertex('D');
+g.addVertex('E');
+g.addVertex('F');
+
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
+
+log(g.dfsIterative('A'))
+
 
