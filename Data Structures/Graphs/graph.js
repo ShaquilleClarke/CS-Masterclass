@@ -37,25 +37,25 @@ class Graph {
     }
 
     dfsRecursive(start) {
-        let results = [], visited = {}, adjList = this.adjacencyList;
+        let result = [], visited = {}, adjList = this.adjacencyList;
         const traverse = (vertex) => {
             if(!vertex) return;
             visited[vertex] = true;
-            results.push(vertex);
+            result.push(vertex);
             for(let val of adjList[vertex]) {
                 if(!visited[val]) traverse(val)
             }
         }
-        traverse(start)
-        return results;
+        traverse(start);
+        return result;
     }
 
     dfsIterative(start) {
-        let results = [], visited = {}, adjList = this.adjacencyList, stack = [start], next
+        let result = [], stack = [start], visited = {}, adjList = this.adjacencyList, next
         visited[start] = true;
         while(stack.length) {
             next = stack.pop();
-            results.push(next);
+            result.push(next);
             for(let val of adjList[next]) {
                 if(!visited[val]) {
                     visited[val] = true;
@@ -63,7 +63,23 @@ class Graph {
                 }
             }
         }
-        return results;
+        return result;
+    }
+
+    bfs(start) {
+        let adjList = this.adjacencyList, queue = [start], visited = {}, result = [], next;
+        visited[start] = true;
+        while(queue.length) {
+            next = queue.shift();
+            result.push(next);
+            for(let val of adjList[next]) {
+                if(!visited[val]) {
+                    visited[val] = true;
+                    queue.push(val);
+                }
+            }
+        }
+        return result;
     }
 }
 
@@ -83,6 +99,6 @@ g.addEdge('D', 'E');
 g.addEdge('D', 'F');
 g.addEdge('E', 'F');
 
-log(g.dfsIterative('A'))
+log(g.bfs('A'))
 
 
