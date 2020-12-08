@@ -32,6 +32,26 @@ const multiplyBit = (a, b) => {
     return c;
 }
 
+const divideBit = (a, b) => {
+    let c = 0, isNegative = 0;
+    if(a < 0) {
+        a = negateBit(a);
+        isNegative = !isNegative;
+    }
+    if(b < 0) {
+        b = negateBit(b);
+        isNegative = !isNegative;
+    }
+    if(b != 0) {
+        while (a >= b) {
+            a = subtractBit(a, b)
+            c++;
+        }
+    }
+    if(isNegative) c = negateBit(c);
+    return c;
+}
+
 // log(subtractBit(7, 3).toString(2))
 // log(addBit(9, 5).toString(2))
-log(multiplyBit(4, 5).toString(2))
+log(divideBit(10, 3))
