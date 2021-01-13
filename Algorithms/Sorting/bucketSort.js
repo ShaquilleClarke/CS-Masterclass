@@ -20,10 +20,7 @@ const bucketSort = (arr) => {
     }
 
     let bucketCount = Math.floor((maxVal - minVal) / size) + 1,
-    allBuckets = new Array(bucketCount);
-    for (let i = 0; i < allBuckets.length; i++) {
-        allBuckets[i] = [];
-    }
+    allBuckets = [...Array(bucketCount)].map(() => []);
 
     for (let val of arr) {
         allBuckets[Math.floor((val - minVal) / size)].push(val);
@@ -32,7 +29,6 @@ const bucketSort = (arr) => {
     for (let bucket of allBuckets) {
         insertionSort(bucket);
     }
-
     return [].concat(...allBuckets);
 }
 log(bucketSort([45, 86, 21, 15, 2]))
