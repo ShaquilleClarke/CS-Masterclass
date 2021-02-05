@@ -47,6 +47,7 @@ class WeightedGraph {
             }
             previous[vertex] = null;
         }
+        log('previous: ', previous)
         // smallest = nodes.dequeue().val;
         // candidate = distance[smallest] + nextNode.weight,
         // nextNeighbor = nextNode.node;
@@ -54,23 +55,34 @@ class WeightedGraph {
         while (nodes.values.length) {
             smallest = nodes.dequeue().val;
             if (smallest === finish) {
+                log('distances: ', distance)
+                log('previous: ', previous)
                 while (previous[smallest]) {
                     path.push(smallest);
                     smallest = previous[smallest];
+                    
                 }
                 break;
             }
+            
             if (smallest || distance[smallest] !== Infinity) {
                 for (let neighbor in this.adjList[smallest]) {
-                    let nextNode = this.adjList[smallest][neighbor],
-                    candidate = distance[smallest] + nextNode.weight,
-                    nextNeighbor = nextNode.node;
-
+                    log(`Here is whats in ${smallest}:` , this.adjList[smallest]);
+                    log('current neighbor: ', neighbor);
+                    let nextNode = this.adjList[smallest][neighbor];
+                    let candidate = distance[smallest] + nextNode.weight;
+                    let nextNeighbor = nextNode.node;
+                    log('nextNode is this => ', this.adjList[smallest][neighbor]);
+                    log('candidate is this => ', candidate);
+                    log('nextNeighbor is this => ', nextNeighbor);
                     if (candidate < distance[nextNeighbor]) {
-                        distance[nextNeighbor] = canditate;
+                        distance[nextNeighbor] = candidate;
                         previous[nextNeighbor] = smallest;
-                        nodes.enqueue(nextNeighbor, canditate)
+                        nodes.enqueue(nextNeighbor, candidate)
                     }
+                    log(`Distance of ${nextNeighbor} is ${distance[nextNeighbor]}`);
+                    log(`Previous value of ${nextNeighbor} is ${previous[nextNeighbor]}`);
+                    log('=========================')
                 }
             }
         }
@@ -82,9 +94,9 @@ g.addVertex('Brooklyn');
 g.addVertex('Baldwin');
 g.addVertex('Bronx');
 g.addVertex('Bayonne');
-g.addEdge('Brooklyn', 'Baldwin', "$12");
-g.addEdge('Bayonne', 'Baldwin', "$14");
-g.addEdge('Brooklyn', 'Bayonne', "$18");
-g.addEdge('Brooklyn', 'Bronx', "$2.75");
-g.addEdge('Baldwin', 'Bronx', "$9");
-log(g.Dijkstra('Brooklyn', 'Bayonne'));
+g.addEdge('Brooklyn', 'Baldwin', 12);
+g.addEdge('Bayonne', 'Baldwin', 14);
+g.addEdge('Brooklyn', 'Bayonne', 18);
+g.addEdge('Brooklyn', 'Bronx', 2.75);
+g.addEdge('Baldwin', 'Bronx', 9);
+log(g.Dijkstra('Bayonne', 'Bronx'));
