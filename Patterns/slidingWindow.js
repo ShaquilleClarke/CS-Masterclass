@@ -7,21 +7,23 @@ const assert = require('assert').strict;
 // Write a function called maxSubArraySum which accepts an array of integers and a number called n. This 
 // function should calculate the maximum sum of n consecutive elements in the array
 
-// const maxSubArraySum = (arr, n) => {
-//     let tempSum = 0, maxSum = 0;
-
-//     for (let i = 0; i < n; i++) {
-//         maxSum += arr[i];
-//     }
-//     tempSum = maxSum; 
-//     for (let i = n; i < arr.length; i++) {
-//         tempSum = tempSum - arr[i - n] + arr[i];
-//         // console.log(tempSum)
-//         maxSum = Math.max(maxSum, tempSum);
-//         // console.log('maxSum is:', maxSum)
-//     }
-//     return maxSum;
-// }
+const maxSubArraySum = (arr, n) => {
+    if(arr.length < n) return null;
+    if (n === 1) return Math.max(...arr);
+    let start = 0, end = n - 1, i = start, max = 0, tempMax = 0;
+    while (end < arr.length) {
+        if (i === end) {
+            tempMax += arr[i];
+            max = Math.max(tempMax, max);
+            start++;
+            end++;
+            i = start;
+            tempMax = 0;
+        }
+        tempMax += arr[i];
+        i++;
+    }
+}
 
 //assert.deepStrictEqual(maxSubArraySum([1, 2, 5, 2, 8, 1, 5], 2), 10)
 //onsole.log('result: ', maxSubArraySum([100, 200, 300, 400], 2))
@@ -56,24 +58,24 @@ const assert = require('assert').strict;
 // The function should return the minimal length of a contiguous subarray of the which the sum is greater than
 // or equal to the number passed in to the function. If there isn't one, return 0 
 
-const minSubArrayLen = (arr, sum) => {
-    let end = 0, total = 0, start = 0, minLen = Infinity;
+// const minSubArrayLen = (arr, sum) => {
+//     let end = 0, total = 0, start = 0, minLen = Infinity;
 
-    while (start < arr.length) {
-        if (total < sum && end < arr.length) {
-            total += arr[end];
-            end++
-        }
-        else if (total >= sum) {
-            minLen = Math.min(minLen, end - start);
-            total -= arr[start];
-            start++;
-        }
-        else break
-    }
-    return minLen === Infinity ? 0 : minLen;
-}
-console.log(minSubArrayLen([2, 1, 6, 5, 4], 9))
+//     while (start < arr.length) {
+//         if (total < sum && end < arr.length) {
+//             total += arr[end];
+//             end++
+//         }
+//         else if (total >= sum) {
+//             minLen = Math.min(minLen, end - start);
+//             total -= arr[start];
+//             start++;
+//         }
+//         else break
+//     }
+//     return minLen === Infinity ? 0 : minLen;
+// }
+// console.log(minSubArrayLen([2, 1, 6, 5, 4], 9))
 
 
 
