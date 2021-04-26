@@ -3,13 +3,9 @@ const log = console.log;
 const hasPairWithSum = (arr, sum) => {
     let map = {}, diff, i = 0;
     while (i < arr.length) {
-        map[arr[i]] = i;
-        i++;
-    }
-    i = 0;
-    while (i < arr.length) {
         diff = sum - arr[i];
         if((diff in map) && map[diff] !== i) return true;
+        map[arr[i]] = i;
         i++;
     }
     return false;  
