@@ -1,5 +1,7 @@
 const log = console.log;
 
+// This is a variation of twoSum that asks to return a boolean
+
 const hasPairWithSum = (arr, sum) => {
     let map = {}, diff, i = 0;
     while (i < arr.length) {
