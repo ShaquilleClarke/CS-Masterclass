@@ -9,6 +9,6 @@ const removeDuplicates = (nums) => {
         }
         i++;
     }
-    return i;
+    return nums.length;
 }
 log(removeDuplicates([0, 0, 1, 1, 1, 2, 3, 3, 4]))
