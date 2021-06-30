@@ -1,9 +1,9 @@
 const log = console.log;
 
 class ListNode {
-    constructor(val, next) {
-        this.val = (val === undefined ? null : val);
-        this.next = (next === undefined ? null : next);
+    constructor(val) {
+        this.val = val;
+        this.next = null;
     }
 }
 
