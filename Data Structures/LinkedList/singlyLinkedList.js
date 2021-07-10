@@ -131,21 +131,44 @@ class LinkedList {
         return this;
     }
 
+    isPalindrome() {
+        let curr = this.head, mid = this.head, temp, reverse = null;
+        while(curr && curr.next) {
+            curr = curr.next.next;
+            temp = mid.next;
+            mid.next = reverse;
+            reverse = mid;
+            mid = temp;
+        }
+        if(curr) mid = mid.next;
+        while(mid) {
+            if(mid.val !== reverse.val) return false;
+            mid = mid.next;
+            reverse = reverse.next;
+        }
+        return true;
+    }
+
 }
 
 
 let list = new LinkedList;
-list.push('humpty');
-list.push('dumpty');
-list.push('butt cheeks');
-list.push('keeo pushin');
-list.push('abracadabra')
-list.set(4, 'pootie tang')
-list.insert(2, 'dogma')
-list.insert(1, 'cupertino');
-list.remove(3);
-list.reverse();
-log(list.get(0))
+list.push(1)
+// list.push(2)
+// list.push(2)
+// list.push(1)
+log(list.isPalindrome());
+// list.push('humpty');
+// list.push('dumpty');
+// list.push('butt cheeks');
+// list.push('keeo pushin');
+// list.push('abracadabra')
+// list.set(4, 'pootie tang')
+// list.insert(2, 'dogma')
+// list.insert(1, 'cupertino');
+// list.remove(3);
+// list.reverse();
+// log(list.get(0))
 //log(list.get(3))
 
 // log(list.pop());
