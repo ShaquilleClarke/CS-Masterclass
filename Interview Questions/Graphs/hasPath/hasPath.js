@@ -2,11 +2,18 @@
 const log = console.log;
 
 // const hasPath = (start, graph, dst) => {
-//     if(start === dst) return true;
-//     // log(graph[start])
-//     for(let neighbor of graph[start]) {
-//         // log(neighbor)
-//         if(hasPath(neighbor, graph, dst) === true) return true;
+//     const queue = [start], visited = {};
+//     let curr;
+//     visited[start] = true;
+//     while(queue.length) {
+//         curr = queue.shift();
+//         if(curr === dst) return true;
+//         for(let neighbor of graph[curr]) {
+//             if(!visited[neighbor]) {
+//                 visited[neighbor] = true;
+//                 queue.push(neighbor);
+//             }
+//         }
 //     }
 //     return false;
 // }
