@@ -18,13 +18,27 @@ const log = console.log;
 //     return false;
 // }
 
+// const hasPath = (start, graph, dst) => {
+//     const visited = {};
+//     const traverse = (vrtx) => {
+//         if(vrtx === dst) return true;
+//         visited[vrtx] = true;
+//         for (let neighbor of graph[vrtx]) {
+//             if(!visited[neighbor] && traverse(neighbor) === true) return true;
+//         }
+//         return false;
+//     }
+//     return traverse(start);
+// }
+
 const hasPath = (start, graph, dst) => {
-    const visited = {};
+    const visited = new Set();
     const traverse = (vrtx) => {
+        if (visited.has(vrtx)) return false;
         if(vrtx === dst) return true;
-        visited[vrtx] = true;
+        visited.add(vrtx);
         for (let neighbor of graph[vrtx]) {
-            if(!visited[neighbor] && traverse(neighbor) === true) return true;
+            if(traverse(neighbor) === true) return true;
         }
         return false;
     }
