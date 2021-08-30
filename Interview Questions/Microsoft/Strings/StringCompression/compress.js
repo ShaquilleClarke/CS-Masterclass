@@ -43,7 +43,25 @@
 // Explanation: The groups are "aaa", "bb", and "aa". This compresses to "a3b2a2". Note that each group 
 // is independent even if two groups have the same character.
 
+const log = console.log;
 
-var compress = function(chars) {
-    
+const compress = (chars) => {
+    let times = 0, curr = chars[0];
+    chars.push("End");
+
+    while (curr !== "End") {
+        if (chars[0] === curr) {
+            times++;
+            chars.shift();
+        } else {
+            chars.push(curr);
+            if (times > 1) chars.push(...(times + ""));
+            times = 0;
+            curr = chars[0];
+        }
+    }
+    chars.shift();
+    return chars.length;
 };
+// log(compress(["a","b","b","b","b","b","b","b","b","b","b","b","b"]))
+log(compress(["a","a","a","b","b","a","a"]))

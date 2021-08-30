@@ -38,6 +38,6 @@
 // Output: 1
 
 
-var minInsertions = function(s) {
+const minInsertions = (s) => {
     
 };
