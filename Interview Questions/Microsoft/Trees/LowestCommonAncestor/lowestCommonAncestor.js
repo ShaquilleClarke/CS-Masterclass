@@ -25,13 +25,25 @@
 // Output: 1
 
 
-class TreeNode {
-    constructor(val) {
-        this.val = val;
-        this.left = this.right = null;
-    }
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
 }
 
 const lowestCommonAncestor = (root, p, q)  => {
-    
+    const dfs = (node) => {
+        if (
+            !node || node.val === p.val || 
+            node.val === q.val
+        ) return node;
+
+        let left = dfs(node.left),
+        right = dfs(node.right);
+
+        if (!left) return right;
+        if (!right) return left;
+
+        return node;
+    }
+    return dfs(root);
 };
