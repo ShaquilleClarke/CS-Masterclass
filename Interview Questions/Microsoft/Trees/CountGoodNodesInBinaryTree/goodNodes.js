@@ -41,6 +41,12 @@
  * @param {TreeNode} root
  * @return {number}
  */
- var goodNodes = function(root) {
-    
+ const goodNodes = (root) => {
+    const traverse = (node, max) => {
+        if (!node) return 0;
+        return (node.val >= max ? 1 : 0) +
+        traverse(node.left, Math.max(nax, node.val)) +
+        traverse(node.right, Math.max(max, node.val));        
+    }
+    return traverse(root, root.val);
 };
