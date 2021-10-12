@@ -23,6 +23,8 @@
 // Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
 
 
+
+
 // Example 2:
 
 // Input: head = [[1,1],[2,1]]
@@ -50,6 +52,33 @@ class Node {
     }
 }
 
+const log = console.log;
+
 const copyRandomList = (head) => {
-    
+    const visited = new Map();
+
+    const search = (node) => {
+        if (!node) return null;
+        if (visited.has(node)) return visited.get(node);
+        let root = new Node(node.val);
+        visited.set(node, root);
+        root.next = search(node.next);
+        root.random = search(node.random);
+
+        return root;
+    }
+    return search(head);
 };
+/*
+
+cur (7,null) -> (13, 0) -> (11, 4) -> (10, 2) -> (1, 0)
+     ^
+
+
+(7, null) -> (13, 0) -> (11, 4) -> (10, 2) -> (1, 0) -> null
+
+
+visited = { {7:7}, {13:13}, {11:11}, {0:0}, {10:10}, {4:4}, {1:1}, {2:2} }
+
+*/ 
+
