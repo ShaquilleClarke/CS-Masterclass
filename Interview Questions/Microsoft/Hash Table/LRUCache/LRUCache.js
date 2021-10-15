@@ -32,23 +32,98 @@
 // lRUCache.get(3);    // return 3
 // lRUCache.get(4);    // return 4
 
-const LRUCache = (capacity) => {
+const log = console.log;
+
+class LRUCache {
+    constructor(capacity) {
+        this.capacity = capacity;
+        this.DLL = new DLL()
+        this.map = new Map();
+    }
+
+    get(key) {
+        if (this.map.has(key)) {
+            let node = this.map.get(key);
+            this.DLL.moveToFront(node);
+            return node;
+        } else {
+            return -1;
+        }
+    };
+
+
+    put(key, value) {
+        if (this.get(key) !== -1) {
+            let node = this.get(key);
+            node.val = value;
+            this.DLL.moveToFront(node);
+            return;
+        }
+
+        if (this.map.size === this.capacity) {
+            let node = this.DLL.removeLast();
+            this.map.delete(node.key);
+        }
+
+        let newNode = new Node(key, value);
+        this.DLL.add(newNode);
+        this.map.set(key, newNode);
+    };
     
 };
 
+class DLL {
+    constructor() {
+        this.head = new Node();
+        this.tail = new Node();
+        this.connect(this.head, this.tail);
+        this.length = 0
+    }
 
-LRUCache.prototype.get = (key) => {
-    
-};
+    connect(node1, node2) {
+        node1.next = node2;
+        node2.prev = node1;
+    }
+
+    add(node) {
+        this.connect(node, this.head.next);
+        this.connect(this.head, node);
+        this.length++;
+    }
+
+    removeLast() {
+        const node = this.tail.prev;
+        this.delete(node);
+        return node;
+    }
+
+    moveToFront(node) {
+        this.delete(node);
+        this.add(node);
+    }
+
+    delete(node) {
+        this.connect(node.prev, node.next);
+        this.length--;
+    }
+}
+
+class Node {
+    constructor(key, val) {
+        this.key = key;
+        this.val = val;
+        this.prev = null;
+        this.next = null;
+    }
+}
 
 
-LRUCache.prototype.put = (key, value) => {
-    
-};
+let lruCache = new LRUCache(2);
+lruCache.put(2, 1);
+lruCache.put(1, 1);
+lruCache.put(2, 3);
+// lruCache.put(4, 1);
+// lruCache.get(1);
+// lruCache.get(2);
+log(lruCache.DLL)
 
-/** 
- * Your LRUCache object will be instantiated and called as such:
- * var obj = new LRUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
