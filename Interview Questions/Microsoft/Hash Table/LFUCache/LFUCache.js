@@ -49,34 +49,127 @@
 // lfu.get(4);      // return 4
 //                  // cache=[3,4], cnt(4)=2, cnt(3)=3
 
+const log = console.log;
 
-/**
- * @param {number} capacity
- */
- var LFUCache = function(capacity) {
+class LFUCache {
+    constructor(capacity) {
+        this.capacity = capacity
+        this.dLL = new DLL();
+        this.map = new Map();
+        this.freqMap = new Map();
+    }
     
-};
-
-/** 
- * @param {number} key
- * @return {number}
- */
-LFUCache.prototype.get = function(key) {
+    get(key) {
+        if (this.map.has(key)) {
+            let node = this.map.get(key);
+            this.freqMap.get(node.freq).delete(node);
+            node.freq++;
+            if(!this.freqMap.has(node.freq)) {
+                this.freqMap.set(node.freq, new DLL());
+            }
+            this.freqMap.get(node.freq).add(node);
+            return node.val;
+        } else {
+            return -1;
+        }
+    }
     
-};
+    put(key, value) {
+        if (this.capacity === 0) return;
+        if (this.map.has(key)) {
+            let node = this.map.get(key);
+            this.freqMap.get(node.freq).delete(node);
+            node.val = value;
+            node.freq++;
+            if(!this.freqMap.has(node.freq)) {
+                this.freqMap.set(node.freq, new DLL());
+            }
+            this.freqMap.get(node.freq).add(node);
+            return;
+        }
+        
+        if (this.map.size === this.capacity) {
+           let min = Infinity;
+           for (let freq of this.freqMap.keys()) {
+               if (this.freqMap.get(freq).isEmpty()) continue;
+               min = Math.min(freq, min);
+           }
+           let lastNode = this.freqMap.get(min).removeLast();
+           this.map.delete(lastNode.key);
+        }
+        
+        let node = new Node(key, value, 1);
+        this.map.set(key, node);
+        if (!this.freqMap.has(node.freq)) {
+            this.freqMap.set(node.freq, new DLL());
+        }
+        this.freqMap.get(node.freq).add(node);
+    }
+}
 
-/** 
- * @param {number} key 
- * @param {number} value
- * @return {void}
- */
-LFUCache.prototype.put = function(key, value) {
+class DLL {
+    constructor() {
+        this.head = new Node();
+        this.tail = new Node();
+        this.connect(this.head, this.tail);
+        this.length = 0;
+    }
     
-};
+    connect(node1, node2) {
+        node1.next = node2;
+        node2.prev = node1;
+    }
+    
+    add(node) {
+        this.connect(node, this.head.next);
+        this.connect(this.head, node);
+        this.length++;
+    }
+    
+    removeLast() {
+        let last = this.tail.prev;
+        this.delete(last);
+        return last;
+    }
+    
+    moveToFront(node) {
+        this.delete(node);
+        this.add(node);
+    }
+    
+    delete(node) {
+        this.connect(node.prev, node.next);
+        this.length--;
+    }
 
-/** 
- * Your LFUCache object will be instantiated and called as such:
- * var obj = new LFUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
+    isEmpty() {
+        return this.length === 0 ? true : false;
+    }
+}
+
+class Node {
+    constructor(key, val, freq) {
+        this.key = key;
+        this.val = val;
+        this.freq = freq;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+
+const lfu = new LFUCache(0);
+// lfu.put(2, 2)
+log(lfu.put(0, 0))
+// lfu.put(1, 1)
+// lfu.get(2)
+// lfu.get(1)
+// lfu.get(2)
+// lfu.put(3, 3)
+// lfu.put(4, 4)
+// lfu.get(3)
+// lfu.get(2)
+// lfu.get(1)
+// lfu.get(4)
+
+
