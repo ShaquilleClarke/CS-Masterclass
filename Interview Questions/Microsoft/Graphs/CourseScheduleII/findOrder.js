@@ -30,7 +30,53 @@
 // Input: numCourses = 1, prerequisites = []
 // Output: [0]
 
+const log = console.log;
+
+const buildList = (n, edges) => {
+    const adjList = Array.from({length: n}, () => []);
+
+    for (let edge of edges) {
+        let [src, dst] = edge;
+        adjList[src].push(dst);
+    }
+    return adjList;
+}
+
+const dfs = (node, adjList, visited, arrive, depart, topSort) => {
+    arrive[node]++;
+    visited[node] = true;
+
+    for (let neighbor of adjList[node]) {
+        if (!visited[neighbor]) {
+            visited[neighbor] = true;
+            if (dfs(neighbor, adjList, visited, arrive, depart, topSort)) return true;
+        } else {
+            if (depart[neighbor] === 0) return true;
+        }
+    }
+    /* 
+        This is a timestamp. 
+        If we haven't departed the node
+        then there is a cycle. We don't 
+        want cycles
+    */
+    depart[node]++;
+    topSort.push(node);
+    return false;
+}
 
 const findOrder = (numCourses, prerequisites) => {
-    
+    const adjList = buildList(numCourses, prerequisites),
+    visited = {}, arrive = new Array(numCourses).fill(0),
+    depart = new Array(numCourses).fill(0),
+    topSort = [];
+
+    for (let vrtx = 0; vrtx < adjList.length; vrtx++) {
+        if (!visited[vrtx]) {
+            if(dfs(vrtx, adjList, visited, arrive, depart, topSort)) return [];
+        }
+    }
+    return topSort;
 };
+
+log(findOrder(2, [[1,0]]))
