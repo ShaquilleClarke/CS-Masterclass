@@ -10,6 +10,7 @@
 // You may assume all tickets form at least one valid itinerary. You must use all the tickets once and only once.
 
 
+
 // Example 1:
 
 // Input: tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
@@ -22,12 +23,37 @@
 // Output: ["JFK","ATL","JFK","SFO","ATL","SFO"]
 // Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"] but it is larger in lexical order.
 
+const log = console.log;
 
-/**
- * @param {string[][]} tickets
- * @return {string[]}
- */
- var findItinerary = function(tickets) {
+const buildList = (edges) => {
+    const adjList = {};
     
-};
+    for(let edge of edges) {
+        let [src, dst] = edge;
+        if(!adjList[src]) {
+            adjList[src] = [dst];
+        } else {
+            adjList[src].push(dst);
+        }
+    }
+    return adjList;
+}
 
+const findItinerary = (tickets) => {
+    const adjList = buildList(tickets), route = [];
+
+    for(let vrtx in adjList) {
+        adjList[vrtx].sort();
+    }  
+    
+    const dfs = (node) => {
+        let dst = adjList[node];
+        while(dst && dst.length) {
+            dfs(dst.shift());
+        }
+        route.unshift(node);
+    }
+    dfs('JFK');
+    return route;
+};
+log(findItinerary([["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]))
