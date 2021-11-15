@@ -28,32 +28,31 @@
 // medianFinder.addNum(3);    // arr[1, 2, 3]
 // medianFinder.findMedian(); // return 2.0
 
+const log = console.log;
 
-/**
- * initialize your data structure here.
- */
-const MedianFinder = () => {
+class MedianFinder {
+    constructor() {
+        this.small = [];
+        this.large = [];
+    }
     
+    addNum(num) {
+        
+    }
+    
+    findMedian() {
+        if(!this.nums.length) return;
+        let sum = 0;
+
+        for (let i = 0; i < this.nums.length; i++) {
+            sum+= this.nums[i];
+        }
+        return sum/this.nums.length;
+    }
 };
 
-/** 
- * @param {number} num
- * @return {void}
- */
-MedianFinder.prototype.addNum = (num) => {
-    
-};
-
-/**
- * @return {number}
- */
-MedianFinder.prototype.findMedian = () => {
-    
-};
-
-/** 
- * Your MedianFinder object will be instantiated and called as such:
- * var obj = new MedianFinder()
- * obj.addNum(num)
- * var param_2 = obj.findMedian()
- */
+const medFind = new MedianFinder();
+// medFind.addNum(1)
+// medFind.addNum(2)
+medFind.addNum(3)
+log(medFind.findMedian())

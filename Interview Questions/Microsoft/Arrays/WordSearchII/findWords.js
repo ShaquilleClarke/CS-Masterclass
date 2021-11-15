@@ -54,6 +54,14 @@ root: {
 
 const log = console.log;
 
+// class TrieNode {
+//     constructor(value) {
+//       this.value = value;
+//       this.isWord = false;
+//       this.children = {};
+//     }
+// }
+
 // class Trie {
 //     constructor() {
 //         this.children = {};
@@ -90,6 +98,36 @@ const log = console.log;
 //         }
 //         return true;
 //     }
+
+//     // Walk throughh these steps
+//     // autocomplete(fragment) {
+//     //     if (!fragment) { return; }
+//     //     let result = [];
+//     //     let n = this.root;
+//     //     for (let i = 0; i < fragment.length; i++) {
+//     //       let c = fragment[i];
+//     //       if (!n.children[c]) {
+//     //         break;
+//     //       }
+//     //       n = n.children[c];
+//     //       if (i === fragment.length - 1) {
+//     //         const queue = [];
+//     //         queue.push([n, fragment]);
+//     //         while (queue.length) {
+//     //           let element = queue.shift();
+//     //           let [node, word] = element;
+//     //           if (node.isWord) {
+//     //             result.push(word)
+//     //           }
+//     //           for (const j in node.children) {
+//     //             const child = node.children[j];
+//     //             queue.push([child, word + child.value]);
+//     //           }
+//     //         }
+//     //       }
+//     //     }
+//     //     return result;
+//     // }
 // }
 
 const buildTrie = (words) => {
@@ -145,4 +183,13 @@ const findWords = (board, words) => {
 
 // log(buildTrie(["oath","pea","eat","rain"]))
 
-log(findWords([["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]],["oath","pea","eat","rain"]))
+// log(findWords([["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]],["oath","pea","eat","rain"]))
+
+const trie = new Trie();
+trie.insert('dog')
+trie.insert('door')
+trie.insert('does')
+trie.insert('dolo')
+trie.insert('dollar')
+
+log(trie.autocomplete('doll'))
