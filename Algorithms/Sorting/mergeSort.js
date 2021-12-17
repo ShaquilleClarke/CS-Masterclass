@@ -1,5 +1,7 @@
 const log = console.log;
 
+/* Best if used on large arrays (customers in database) - O(log n) */
+
 const merge = (array1, array2) => {
     let arr1 = array1, arr2 = array2, results = [],
     i = 0, j = 0;

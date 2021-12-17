@@ -1,5 +1,7 @@
 const log = console.log;
 
+/* General purpose */
+
 const quickSort = (arr) => {
     if(arr.length <= 1) return arr;
     const pivot = arr[arr.length - 1],

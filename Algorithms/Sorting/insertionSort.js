@@ -1,4 +1,5 @@
 const log = console.log;
+/*  Best if used on almost sorted arrays - O(n) */
 
 const insertionSort = (array) => {
     let arr = array;
@@ -15,3 +16,4 @@ const insertionSort = (array) => {
     return arr;
 }
 log(insertionSort([25, 16, 32, 4, 1]))
+//                                ji
