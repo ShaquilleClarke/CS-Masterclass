@@ -41,5 +41,18 @@ const Log = console.log;
 */ 
 
 const fizzBuzz = (num) => {
-
+    const results = [];
+    for(let i = 1; i <= num; i++) 
+    {
+        let divisibleByThree = i % 3 === 0,
+        divisibleByFive = i % 5 === 0 
+        // Log(`Current number ${i}`)
+        if (divisibleByThree && divisibleByFive) results.push("FizzBuzz")
+        else if (divisibleByThree) results.push("Fizz")
+        else if (divisibleByFive) results.push("Buzz")
+        else results.push(i + "")
+        // Log(results)
+    }
+    return results;
 }
+Log(fizzBuzz(15))
