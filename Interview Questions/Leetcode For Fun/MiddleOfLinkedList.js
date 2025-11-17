@@ -31,14 +31,12 @@ The number of nodes in the list is in the range [1, 100].
 const Log = console.log;
 
 const middleNode = (head) => {
-    /*
-    
-        - Create a varible called tail that points to the head
-        - Create a loop that continues while tail.next isn't null
-            - If tail.next.next isn't null, point tail to tail.next.next
-            - Point head to head.next
-        - Return head
-    
-    */ 
+    let tail = head.next;
+    while(tail)
+    {
+        tail = tail.next?.next;
+        head = head.next;
+    }
+    return head;
 };
 Log(middleNode())
