@@ -40,32 +40,27 @@ const Log = console.log;
 
 /*
 
-     - Count the frequency of characters in each string
-     - If a character in ransomNote is also in magazine and has the same frequency, return true
-     - Otherwise, return false
+    - Create a frequency counter for the characters in magazine
+    - Loop through the characters in ransomNote
+        - If the character is not in magazine, return false
+        - Otherwise, decrement the value of the character in the frequency counter by 1
+    - Return true. This indicates that every character in ransomNote has appeared the same number of times within magazine
 
 */ 
+
 const canConstruct = (ransomNote, magazine) => {
-    const freqCounterOne = {};
-    const freqCounterTwo = {};
-    
-    for (const char of ransomNote)
+    const freqCount = {}
+
+    for(const char of magazine)
     {
-        freqCounterOne[char] = (freqCounterOne[char] || 0) + 1;
+        freqCount[char] = (freqCount[char] || 0) + 1;
     }
-
-    for (const char of magazine)
+    
+    for(const char of ransomNote)
     {
-        freqCounterTwo[char] = (freqCounterTwo[char] || 0) + 1;
-    } 
-    Log("Counter One: ", freqCounterOne)
-    Log("Counter Two: ",freqCounterTwo)
-
-    // for (const key in freqCounterOne)
-    // {
-    //     if ((key in freqCounterTwo) && (freqCounterOne[key] <= freqCounterTwo[key] || freqCounterOne[key] >= freqCounterTwo[key])) return true
-
-    // }
-    // return false;
+        if(!freqCount[char]) return false;
+        else freqCount[char] -= 1;
+    }
+    return true;
 };
-Log(canConstruct("bg", "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj"))
+Log(canConstruct("aa", "aab"))
